@@ -39,7 +39,7 @@ class YourUserModel extends Model
 **2.** Next step is to create a point.
 
 ```bash
-php artisan gamify:point PostCreated
+php artisan syehan:gamify-point PostCreated
 ```
 
 It will create a PointType class named `PostCreated` under `app/Gamify/Points/` folder.
@@ -258,7 +258,7 @@ Badge levels are stored as `tinyint` so keep the value as an integer value. It w
 To generate a badge you can run following provided command:
 
 ```bash
-php artisan gamify:badge FirstContribution
+php artisan syehan:gamify-badge FirstContribution
 ```
 
 It will create a BadgeType class named `FirstContribution` under `app/Gamify/Badges/` folder.
