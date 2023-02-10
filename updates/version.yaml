@@ -1,0 +1,4 @@
+1.0.1: 
+      - First version of Gamify
+      - create_gamify_table.php
+      - add_reputation_field_on_user_table.php

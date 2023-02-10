@@ -1,12 +1,15 @@
 {
-  "name": "qcod/laravel-gamify",
-  "description": "Add gamification in laravel app with reputation point and badges support",
-  "homepage": "https://github.com/qcod/laravel-gamify",
-  "type": "library",
+  "name": "syehan/oc-gamify",
+  "description": "Add gamification in OctoberCMS with reputation point and badges support",
+  "homepage": "https://github.com/syehan/oc-gamify",
+  "type": "october-plugin",
   "license": "MIT",
   "keywords": [
     "qcod",
+    "syehan",
     "laravel",
+    "october",
+    "octobercms",
     "achivement",
     "gamify",
     "gamification",
@@ -19,11 +22,14 @@
     {
       "name": "Mohd Saqueib Ansari",
       "email": "saquibweb@gmail.com"
+    },
+    {
+      "name": "Syehan",
+      "email": "sehanlim@outlook.com"
     }
   ],
   "require": {
-    "php": "^7.3|^8.0",
-    "laravel/framework": "~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0"
+    "php": "^7.3|^8.0"
   },
   "require-dev": {
     "orchestra/testbench": "~3.8|^4.0|^5.0|^7.0",
@@ -31,26 +37,8 @@
     "phpunit/phpunit": "~8.5|^9.0"
   },
   "autoload": {
-    "psr-4": {
-      "QCod\\Gamify\\": "src/"
-    },
     "files": [
-      "src/helpers.php"
+      "helpers.php"
     ]
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "QCod\\Gamify\\Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "QCod\\Gamify\\GamifyServiceProvider"
-      ]
-    }
-  },
-  "scripts": {
-    "test": "vendor/bin/phpunit"
   }
 }

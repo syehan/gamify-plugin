@@ -1,23 +1,22 @@
 <?php
 
-namespace Syehan\Gamify\Tests\Badges;
+namespace DummyNamespace;
 
-use Syehan\Gamify\BadgeType;
-use Syehan\Gamify\Tests\Models\User;
+use Syehan\Gamify\Classes\BadgeType;
 
-class FirstThousandPoints extends BadgeType
+class DummyClass extends BadgeType
 {
     /**
      * Description for badge
      *
      * @var string
      */
-    protected $description = 'Congrats! you have reached 1000 points.';
+    protected $description = '';
 
     /**
      * Check is user qualifies for badge
      *
-     * @param User $user
+     * @param $user
      * @return bool
      */
     public function qualifier($user)

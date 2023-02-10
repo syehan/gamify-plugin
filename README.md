@@ -20,7 +20,7 @@ $ composer require qcod/laravel-gamify
 ```php
 'providers' => [
     //...
-    QCod\Gamify\GamifyServiceProvider::class
+    Syehan\Gamify\GamifyServiceProvider::class
 ]
 ```
 
@@ -29,7 +29,7 @@ In Laravel 5.5 and above the service provider automatically.
 **3** - Now publish the migration for gamify tables:
 
 ```
-php artisan vendor:publish --provider="QCod\Gamify\GamifyServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="Syehan\Gamify\GamifyServiceProvider" --tag="migrations"
 ```
 
 *Note:* It will generate migration for `reputations`, `badges` and `user_badges` tables along with add reputation field migration for `users` table to store the points, you will need to run `composer require doctrine/dbal` in order to support dropping and adding columns.
@@ -40,7 +40,7 @@ php artisan migrate
 
 You can publish the config file:
 ```
-php artisan vendor:publish --provider="QCod\Gamify\GamifyServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Syehan\Gamify\GamifyServiceProvider" --tag="config"
 ```
 
 If your payee (model who will be getting the points) model is `App\User` then you don't have to change anything in `config/gamify.php`.
@@ -50,7 +50,7 @@ If your payee (model who will be getting the points) model is `App\User` then yo
 **1.** After package installation now add the **Gamify** trait on `App\User` model or any model who acts as **user** in your app.
 
 ```php
-use QCod\Gamify\Gamify;
+use Syehan\Gamify\Gamify;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -74,7 +74,7 @@ It will create a PointType class named `PostCreated` under `app/Gamify/Points/` 
 
 namespace App\Gamify\Points;
 
-use QCod\Gamify\PointType;
+use Syehan\Gamify\PointType;
 
 class PostCreated extends PointType
 {
@@ -180,7 +180,7 @@ If you want to get all the points given on a `subject` model. You should define 
      */
     public function reputations()
     {
-        return $this->morphMany('QCod\Gamify\Reputation', 'subject');
+        return $this->morphMany('Syehan\Gamify\Reputation', 'subject');
     }
 ```
 
@@ -243,7 +243,7 @@ class PostCreated extends PointType
 
 #### Event on reputation changed
 
-Whenever user point changes it fires `\QCod\Gamify\Events\ReputationChanged` event which has the following payload:
+Whenever user point changes it fires `\Syehan\Gamify\Events\ReputationChanged` event which has the following payload:
 
 ```php
 class ReputationChanged implements ShouldBroadcast {
@@ -293,7 +293,7 @@ It will create a BadgeType class named `FirstContribution` under `app/Gamify/Bad
 
 namespace App\Gamify\Badges;
 
-use QCod\Gamify\BadgeType;
+use Syehan\Gamify\BadgeType;
 
 class FirstContribution extends BadgeType
 {
@@ -371,7 +371,7 @@ return [
     'payee_model' => '\App\User',
 
     // Reputation model
-    'reputation_model' => '\QCod\Gamify\Reputation',
+    'reputation_model' => '\Syehan\Gamify\Reputation',
 
     // Allow duplicate reputation points
     'allow_reputation_duplicate' => true,
@@ -383,7 +383,7 @@ return [
     'channel_name' => 'user.reputation.',
 
     // Badge model
-    'badge_model' => '\QCod\Gamify\Badge',
+    'badge_model' => '\Syehan\Gamify\Badge',
 
     // Where all badges icon stored
     'badge_icon_folder' => 'images/badges/',
@@ -427,9 +427,9 @@ If you discover any security related issues, please email saquibweb@gmail.com in
 
 - [Mohd Saqueib Ansari](https://github.com/saqueib) (Author)
 
-### About QCode.in
+### About Syehane.in
 
-QCode.in (https://www.qcode.in) is a blog by [Saqueib](https://github.com/saqueib) which covers All about Full Stack Web Development.
+Syehane.in (https://www.qcode.in) is a blog by [Saqueib](https://github.com/saqueib) which covers All about Full Stack Web Development.
 
 ### License
 

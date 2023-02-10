@@ -1,11 +1,11 @@
 <?php
 
-namespace QCod\Gamify\Tests;
+namespace Syehan\Gamify\Tests;
 
-use QCod\Gamify\PointType;
+use Syehan\Gamify\PointType;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\Model;
-use QCod\Gamify\Events\ReputationChanged;
+use Syehan\Gamify\Events\ReputationChanged;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ReputationTest extends TestCase
@@ -19,7 +19,7 @@ class ReputationTest extends TestCase
      */
     public function it_gets_user_points()
     {
-        $user = $this->createUser(['reputation' => 10]);
+        $user = $this->createUser(['syehan_gamify_reputation' => 10]);
 
         $this->assertEquals(10, $user->getPoints());
     }
@@ -46,7 +46,7 @@ class ReputationTest extends TestCase
      */
     public function it_reduces_reputation_point_for_a_user()
     {
-        $user = $this->createUser(['reputation' => 20]);
+        $user = $this->createUser(['syehan_gamify_reputation' => 20]);
         $this->assertEquals(20, $user->reputation);
 
         $user->reducePoint(5);
@@ -61,7 +61,7 @@ class ReputationTest extends TestCase
      */
     public function it_zeros_reputation_point_of_a_user()
     {
-        $user = $this->createUser(['reputation' => 50]);
+        $user = $this->createUser(['syehan_gamify_reputation' => 50]);
         $this->assertEquals(50, $user->getPoints());
 
         $user->resetPoint();
@@ -99,7 +99,7 @@ class ReputationTest extends TestCase
     {
         Event::fake();
 
-        $user = $this->createUser(['reputation' => 10]);
+        $user = $this->createUser(['syehan_gamify_reputation' => 10]);
 
         $user->reducePoint(3);
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace QCod\Gamify\Tests;
+namespace Syehan\Gamify\Tests;
 
-use QCod\Gamify\Badge;
-use QCod\Gamify\Tests\Models\Post;
-use QCod\Gamify\Tests\Models\User;
+use Syehan\Gamify\Badge;
+use Syehan\Gamify\Tests\Models\Post;
+use Syehan\Gamify\Tests\Models\User;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
@@ -31,13 +31,13 @@ abstract class TestCase extends OrchestraTestCase
             'prefix' => '',
         ]);
 
-        $app['config']->set('gamify.payee_model', '\QCod\Gamify\Tests\Models\User');
+        $app['config']->set('gamify.payee_model', '\Syehan\Gamify\Tests\Models\User');
 
         // test badges
         $app->singleton('badges', function () {
             return collect(['FirstContribution', 'FirstThousandPoints'])
                 ->map(function ($badge) {
-                    return app("QCod\\Gamify\\Tests\Badges\\".$badge);
+                    return app("Syehan\\Gamify\\Tests\Badges\\".$badge);
                 });
         });
     }
@@ -48,7 +48,7 @@ abstract class TestCase extends OrchestraTestCase
      */
     protected function getPackageProviders($app)
     {
-        return ['QCod\Gamify\GamifyServiceProvider'];
+        return ['Syehan\Gamify\GamifyServiceProvider'];
     }
 
     /**
