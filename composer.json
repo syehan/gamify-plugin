@@ -1,7 +1,7 @@
 {
-  "name": "syehan/oc-gamify",
+  "name": "syehan/gamify-plugin",
   "description": "Add gamification in OctoberCMS with reputation point and badges support",
-  "homepage": "https://github.com/syehan/oc-gamify",
+  "homepage": "https://github.com/syehan/gamify-plugin",
   "type": "october-plugin",
   "license": "MIT",
   "keywords": [

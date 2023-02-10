@@ -1,6 +1,6 @@
 ## OctoberCMS Gamify  🕹 🏆
 
-Use `syehan/oc-gamify` to add reputation point &amp; badges in your OctoberCMS.
+Use `syehan/gamify-plugin` to add reputation point &amp; badges in your OctoberCMS.
 
 
 ### Installation
@@ -8,7 +8,7 @@ Use `syehan/oc-gamify` to add reputation point &amp; badges in your OctoberCMS.
 **1** - You can install the package via composer:
 
 ```bash
-$ composer require syehan/oc-gamify
+$ composer require syehan/gamify-plugin
 ```
 **2** - Now publish the migration for gamify tables:
 
@@ -17,11 +17,6 @@ php artisan october:migrate
 ```
 
 *Note:* It will generate migration for `syehan_gamify_reputations`, `syehan_gamify_badges` and `syehan_gamify_user_badges` tables along with add reputation field migration for `users` table to store the points, you will need to run `composer require doctrine/dbal` in order to support dropping and adding columns.
-
-You can publish the config file:
-```
-php artisan vendor:publish --provider="Syehan\Gamify\GamifyServiceProvider" --tag="config"
-```
 
 If your payee (model who will be getting the points) model is `RainLab\User\Models\User` then you don't have to change anything in `config/gamify.php`.
 
