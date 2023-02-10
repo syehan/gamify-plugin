@@ -1,60 +1,40 @@
-## Laravel Gamify  🕹 🏆
+## OctoberCMS Gamify  🕹 🏆
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/qcod/laravel-gamify.svg)](https://packagist.org/packages/qcod/laravel-gamify)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/qcod/laravel-gamify/master.svg)](https://travis-ci.org/qcod/laravel-gamify)
-[![Total Downloads](https://img.shields.io/packagist/dt/qcod/laravel-gamify.svg)](https://packagist.org/packages/qcod/laravel-gamify)
+Use `syehan/oc-gamify` to add reputation point &amp; badges in your OctoberCMS.
 
-Use `qcod/laravel-gamify` to quickly add reputation point &amp; badges in your Laravel app.
 
 ### Installation
 
 **1** - You can install the package via composer:
 
 ```bash
-$ composer require qcod/laravel-gamify
+$ composer require syehan/oc-gamify
 ```
-
-**2** - If you are installing on Laravel 5.4 or lower you will be needed to manually register Service Provider by adding it in `config/app.php` providers array.
-
-```php
-'providers' => [
-    //...
-    Syehan\Gamify\GamifyServiceProvider::class
-]
-```
-
-In Laravel 5.5 and above the service provider automatically.
-
-**3** - Now publish the migration for gamify tables:
+**2** - Now publish the migration for gamify tables:
 
 ```
-php artisan vendor:publish --provider="Syehan\Gamify\GamifyServiceProvider" --tag="migrations"
+php artisan october:migrate
 ```
 
-*Note:* It will generate migration for `reputations`, `badges` and `user_badges` tables along with add reputation field migration for `users` table to store the points, you will need to run `composer require doctrine/dbal` in order to support dropping and adding columns.
-
-```
-php artisan migrate
-```
+*Note:* It will generate migration for `syehan_gamify_reputations`, `syehan_gamify_badges` and `syehan_gamify_user_badges` tables along with add reputation field migration for `users` table to store the points, you will need to run `composer require doctrine/dbal` in order to support dropping and adding columns.
 
 You can publish the config file:
 ```
 php artisan vendor:publish --provider="Syehan\Gamify\GamifyServiceProvider" --tag="config"
 ```
 
-If your payee (model who will be getting the points) model is `App\User` then you don't have to change anything in `config/gamify.php`.
+If your payee (model who will be getting the points) model is `RainLab\User\Models\User` then you don't have to change anything in `config/gamify.php`.
 
 ### Getting Started
 
-**1.** After package installation now add the **Gamify** trait on `App\User` model or any model who acts as **user** in your app.
+**1.** After package installation now add the **Gamify** trait on `RainLab\User\Models\User` model or any model who acts as **user** in your app.
 
 ```php
-use Syehan\Gamify\Gamify;
+use Syehan\Gamify\Traits\Gamify;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Model;
 
-class User extends Authenticatable
+class YourUserModel extends Model
 {
     use Notifiable, Gamify;
 ```
@@ -74,7 +54,7 @@ It will create a PointType class named `PostCreated` under `app/Gamify/Points/` 
 
 namespace App\Gamify\Points;
 
-use Syehan\Gamify\PointType;
+use Syehan\Gamify\Classes\PointType;
 
 class PostCreated extends PointType
 {
@@ -368,10 +348,10 @@ You dont need to generate point class for this.
 
 return [
     // Model which will be having points, generally it will be User
-    'payee_model' => '\App\User',
+    'payee_model' => '\RainLab\User\Models\User',
 
     // Reputation model
-    'reputation_model' => '\Syehan\Gamify\Reputation',
+    'reputation_model' => '\Syehan\Gamify\Models\Reputation',
 
     // Allow duplicate reputation points
     'allow_reputation_duplicate' => true,
@@ -383,7 +363,7 @@ return [
     'channel_name' => 'user.reputation.',
 
     // Badge model
-    'badge_model' => '\Syehan\Gamify\Badge',
+    'badge_model' => '\Syehan\Gamify\Models\Badge',
 
     // Where all badges icon stored
     'badge_icon_folder' => 'images/badges/',
@@ -403,10 +383,6 @@ return [
 ];
 ```
 
-### Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
 ### Testing
 
 The package contains some integration/smoke tests, set up with Orchestra. The tests can be run via phpunit.
@@ -415,21 +391,14 @@ The package contains some integration/smoke tests, set up with Orchestra. The te
 $ composer test
 ```
 
-### Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
 ### Security
 
-If you discover any security related issues, please email saquibweb@gmail.com instead of using the issue tracker.
+If you discover any security related issues, please email sehanlim@outlook.com instead of using the issue tracker.
 
 ### Credits
 
 - [Mohd Saqueib Ansari](https://github.com/saqueib) (Author)
-
-### About Syehane.in
-
-Syehane.in (https://www.qcode.in) is a blog by [Saqueib](https://github.com/saqueib) which covers All about Full Stack Web Development.
+- [Syehan](https://github.com/syehan) (Author)
 
 ### License
 
