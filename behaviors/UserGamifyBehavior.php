@@ -6,7 +6,7 @@ use October\Rain\Extension\ExtensionBase;
 
 class UserGamifyBehavior extends ExtensionBase
 {
-    use \Syehan\Gamify\Traits\Gamify;
+    use \Syehan\Gamify\Behaviors\Traits\Gamify;
     
     protected $model;
 

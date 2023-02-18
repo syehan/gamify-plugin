@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Badge
+
+# Model Form Field configuration
+form: $/syehan/gamify/models/badge/fields.yaml
+
+# Model Class name
+modelClass: Syehan\Gamify\Models\Badge
+
+# Default redirect location
+defaultRedirect: syehan/gamify/badges
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: syehan/gamify/badges/update/:id
+    redirectClose: syehan/gamify/badges
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: syehan/gamify/badges
+    redirectClose: syehan/gamify/badges
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

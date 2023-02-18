@@ -2,16 +2,18 @@
 
 namespace Syehan\Gamify\Console;
 
-use Illuminate\Console\GeneratorCommand;
+use October\Rain\Scaffold\GeneratorCommandBase;
 
-class MakePointCommand extends GeneratorCommand
+class MakePointCommand extends GeneratorCommandBase 
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'syehan:gamify-point {name}';
+    protected $signature = 'syehan:gamify-point {namespace : App or Plugin Namespace (eg: Acme.Blog)} 
+    {name : The name of the Point. Eg: PointLoggedIn}
+    {--o|overwrite : Overwrite existing files with generated ones}';
 
     /**
      * The console command description.
@@ -25,27 +27,24 @@ class MakePointCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $type = 'Point';
+    protected $typeLabel = 'Point';
 
     /**
-     * Get the stub file for the generator.
-     *
-     * @return string
+     * makeStubs makes all stubs
      */
-    protected function getStub()
+    public function makeStubs()
     {
-        return __DIR__ . '/stubs/point.stub';
+        $this->makeStub('stubs/point.stub', 'points/{{studly_name}}.php');
     }
 
     /**
-     * Get the default namespace for the class.
-     *
-     * @param string $rootNamespace The root namespace
-     *
-     * @return string
+     * prepareVars prepares variables for stubs
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function prepareVars(): array
     {
-        return $rootNamespace.'\Gamify\Points';
+        return [
+            'name' => $this->argument('name'),
+            'namespace' => $this->argument('namespace'),
+        ];
     }
 }

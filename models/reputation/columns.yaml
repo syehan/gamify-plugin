@@ -1,0 +1,24 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+    payee:
+        label: Participant
+        relation: payee
+        select: name
+        clickable: false
+    name:
+        label: Name
+        searchable: true
+        clickable: false
+    point:
+        label: Point
+        searchable: true
+        sortable: true
+        clickable: false
+    created_at:
+        label: Created At
+        type: date
+        invisible: true
+        clickable: false

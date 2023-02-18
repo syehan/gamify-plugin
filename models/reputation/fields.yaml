@@ -1,0 +1,8 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true

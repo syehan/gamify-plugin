@@ -3,7 +3,7 @@
 namespace Syehan\Gamify\Classes;
 
 use Illuminate\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Model;
 use Syehan\Gamify\Exceptions\PointsNotDefined;
 use Syehan\Gamify\Exceptions\InvalidPayeeModel;
 use Syehan\Gamify\Exceptions\PointSubjectNotSet;

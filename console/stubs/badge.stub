@@ -1,10 +1,10 @@
 <?php
 
-namespace DummyNamespace;
+namespace {{namespace_php}}\Badges;
 
 use Syehan\Gamify\Classes\BadgeType;
 
-class DummyClass extends BadgeType
+class {{studly_name}} extends BadgeType
 {
     /**
      * Description for badge

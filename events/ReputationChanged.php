@@ -4,7 +4,6 @@ namespace Syehan\Gamify\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -14,7 +13,7 @@ class ReputationChanged implements ShouldBroadcast
     use Dispatchable, SerializesModels;
 
     /**
-     * @var Model
+     * @var User
      */
     public $user;
 
@@ -35,7 +34,7 @@ class ReputationChanged implements ShouldBroadcast
      * @param $point integer
      * @param $increment
      */
-    public function __construct(Model $user, int $point, bool $increment)
+    public function __construct($user, int $point, bool $increment)
     {
         $this->user = $user;
         $this->point = $point;
@@ -49,12 +48,13 @@ class ReputationChanged implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        $channelName = config('gamify.channel_name') . $this->user->getKey();
+        if(config('gamify.enable_broadcast', false)){
+            $channelName = config('gamify.channel_name') . $this->user->getKey();
 
-        if (config('gamify.broadcast_on_private_channel')) {
-            return new PrivateChannel($channelName);
+            if (config('gamify.broadcast_on_private_channel')) {
+                return new PrivateChannel($channelName);
+            }
+            return new Channel($channelName);
         }
-
-        return new Channel($channelName);
     }
 }

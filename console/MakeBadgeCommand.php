@@ -2,16 +2,18 @@
 
 namespace Syehan\Gamify\Console;
 
-use Illuminate\Console\GeneratorCommand;
+use October\Rain\Scaffold\GeneratorCommandBase;
 
-class MakeBadgeCommand extends GeneratorCommand
+class MakeBadgeCommand extends GeneratorCommandBase
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'syehan:gamify-badge {name}';
+    protected $signature = 'syehan:gamify-badge {namespace : App or Plugin Namespace (eg: Acme.Blog)} 
+    {name : The name of the Badge. Eg: FirstContribution}
+    {--o|overwrite : Overwrite existing files with generated ones}';
 
     /**
      * The console command description.
@@ -25,28 +27,25 @@ class MakeBadgeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $type = 'Badge';
+    protected $typeLabel = 'Badge';
 
     /**
-     * Get the stub file for the generator.
-     *
-     * @return string
+     * makeStubs makes all stubs
      */
-    protected function getStub()
+    public function makeStubs()
     {
-        return __DIR__.'/stubs/badge.stub';
+        $this->makeStub('stubs/badge.stub', 'badges/{{studly_name}}.php');
     }
 
     /**
-     * Get the default namespace for the class.
-     *
-     * @param string $rootNamespace The root namespace
-     *
-     * @return string
+     * prepareVars prepares variables for stubs
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function prepareVars(): array
     {
-        return $rootNamespace.'\Gamify\Badges';
+        return [
+            'name' => $this->argument('name'),
+            'namespace' => $this->argument('namespace'),
+        ];
     }
 
     /**

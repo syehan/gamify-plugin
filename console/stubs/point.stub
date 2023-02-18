@@ -1,10 +1,10 @@
 <?php
 
-namespace DummyNamespace;
+namespace {{namespace_php}}\Points;
 
 use Syehan\Gamify\Classes\PointType;
 
-class DummyClass extends PointType
+class {{studly_name}} extends PointType
 {
     /**
      * Number of points

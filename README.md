@@ -20,6 +20,72 @@ php artisan october:migrate
 
 If your payee (model who will be getting the points) model is `RainLab\User\Models\User` then you don't have to change anything in `config/gamify.php`.
 
+## Config Gamify
+
+```php
+<?php
+
+return [
+    // Auth Base, available \Auth or \BackendAuth
+    'auth_base' => env('GAMIFY_AUTH_BASE', \Auth::class),
+    
+    // Model which will be having points, generally it will be User
+    'payee_model' => '\RainLab\User\Models\User',
+
+    // Reputation model
+    'reputation_model' => '\Syehan\Gamify\Models\Reputation',
+
+    // Allow duplicate reputation points
+    'allow_reputation_duplicate' => true,
+
+    // Broadcast on private channel
+    'broadcast_on_private_channel' => true,
+
+    // Channel name prefix, user id will be suffixed
+    'channel_name' => 'user.reputation.',
+
+    // Badge model
+    'badge_model' => '\Syehan\Gamify\Models\Badge',
+
+    // Where all badges icon stored
+    'badge_icon_folder' => 'images/badges/',
+
+    // Extention of badge icons
+    'badge_icon_extension' => '.svg',
+
+    // All the levels for badge
+    'badge_levels' => [
+        'beginner' => 1,
+        'intermediate' => 2,
+        'advanced' => 3,
+    ],
+
+    // Default level
+    'badge_default_level' => 1
+];
+```
+
+## Autoload Helpers
+to supporting easy gamify helpers, like `givePoint()` or `undoPoint()`, please make sure you already autoload helpers.php in your `composer.json` root.
+
+here's the example : 
+```json
+"autoload": {
+    "psr-4": {
+        "System\\Console\\": "modules/system/console"
+    },
+    "files": [
+        "plugins/syehan/gamify/helpers.php"
+    ]
+}
+```
+
+after that,
+
+```bash
+$ composer dumpautoload
+```
+
 ### Getting Started
 
 **1.** After package installation now add the **Gamify** trait on `RainLab\User\Models\User` model or any model who acts as **user** in your app.
@@ -335,48 +401,6 @@ $user->resetPoint();
 ```
 
 You dont need to generate point class for this.  
-
-### Config Gamify
-
-```php
-<?php
-
-return [
-    // Model which will be having points, generally it will be User
-    'payee_model' => '\RainLab\User\Models\User',
-
-    // Reputation model
-    'reputation_model' => '\Syehan\Gamify\Models\Reputation',
-
-    // Allow duplicate reputation points
-    'allow_reputation_duplicate' => true,
-
-    // Broadcast on private channel
-    'broadcast_on_private_channel' => true,
-
-    // Channel name prefix, user id will be suffixed
-    'channel_name' => 'user.reputation.',
-
-    // Badge model
-    'badge_model' => '\Syehan\Gamify\Models\Badge',
-
-    // Where all badges icon stored
-    'badge_icon_folder' => 'images/badges/',
-
-    // Extention of badge icons
-    'badge_icon_extension' => '.svg',
-
-    // All the levels for badge
-    'badge_levels' => [
-        'beginner' => 1,
-        'intermediate' => 2,
-        'advanced' => 3,
-    ],
-
-    // Default level
-    'badge_default_level' => 1
-];
-```
 
 ### Testing
 

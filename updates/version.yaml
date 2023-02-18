@@ -2,3 +2,11 @@
       - First version of Gamify
       - create_gamify_table.php
       - add_reputation_field_on_user_table.php
+1.0.2: Minor fix Point and Badge Command.
+1.0.3: Minor fix ReputationChanged channeling broadcast able to disabled.
+1.0.4: Adds binding behaviors to model RainLab.User and Backend.User.
+1.0.5: Minor fix helpers.php.
+1.0.6: Minor fix typo namespace on GamifyUserBehavior.php.
+1.0.7: Minor fix fetching getBadges() storing to Database.
+1.0.8: Adds Auth Base to able switch User authentication in config/gamify.php, can switch to \Auth::class or \BackendAuth::class.
+1.1.0: Create Backend Navigation Menus for gamify, showing Badges and Reputation.

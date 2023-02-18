@@ -1,19 +1,16 @@
 <?php
 
-use Syehan\Gamify\PointType;
-use Auth;
-
 if (!function_exists('givePoint')) {
 
     /**
      * Give point to user
      *
-     * @param PointType $pointType
+     * @param \Syehan\Gamify\Classes\PointType $pointType
      * @param null $payee
      */
-    function givePoint(PointType $pointType, $payee = null)
+    function givePoint(\Syehan\Gamify\Classes\PointType $pointType, $payee = null)
     {
-        $payee = $payee ?? Auth::user();
+        $payee = $payee ?? config('gamify.auth_base')::user();
 
         if (!$payee) {
             return;
@@ -28,12 +25,12 @@ if (!function_exists('undoPoint')) {
     /**
      * Undo a given point
      *
-     * @param PointType $pointType
+     * @param \Syehan\Gamify\Classes\PointType $pointType
      * @param null $payee
      */
-    function undoPoint(PointType $pointType, $payee = null)
+    function undoPoint(\Syehan\Gamify\Classes\PointType $pointType, $payee = null)
     {
-        $payee = $payee ?? Auth::user();
+        $payee = $payee ?? config('gamify.auth_base')::user();
 
         if (!$payee) {
             return;

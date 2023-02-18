@@ -1,6 +1,9 @@
 <?php
 
 return [
+    // Auth Base, available \Auth or \BackendAuth
+    'auth_base' => env('GAMIFY_AUTH_BASE', \Auth::class),
+    
     // Model which will be having points, generally it will be User
     'payee_model' => env('GAMIFY_PAYEE_MODEL', \RainLab\User\Models\User::class),
 
@@ -13,9 +16,9 @@ return [
     // Broadcast on private channel
     'broadcast_on_private_channel' => env('GAMIFY_BROADCAST_ON_PRIVATE_CHANNEL', false),
 
-    // Channel name prefix, user id will be suffixed
-    'channel_name' => env('GAMIFY_CHANNEL_NAME', 'user.reputation.'),
-
+    // Channel name prefix. If you give the value `null` then channel is non-active, user id will be suffixed ex: "user.reputation."
+    'channel_name' => env('GAMIFY_CHANNEL_NAME', null),
+    
     // Badge model
     'badge_model' => env('GAMIFY_BADGE_MODEL', \Syehan\Gamify\Models\Badge::class),
 

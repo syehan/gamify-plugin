@@ -1,8 +1,7 @@
 <?php namespace Syehan\Gamify\Updates;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
+use Schema;
+use October\Rain\Database\Updates\Migration;
 
 class CreateGamifyTables extends Migration
 {
@@ -14,7 +13,7 @@ class CreateGamifyTables extends Migration
     public function up()
     {
         // reputations table
-        Schema::create('syehan_gamify_reputations', function (Blueprint $table) {
+        Schema::create('syehan_gamify_reputations', function ($table) {
             $table->increments('id');
             $table->string('name');
             $table->mediumInteger('point', false)->default(0);
@@ -26,7 +25,7 @@ class CreateGamifyTables extends Migration
         });
 
         // badges table
-        Schema::create('syehan_gamify_badges', function (Blueprint $table) {
+        Schema::create('syehan_gamify_badges', function ($table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description')->nullable();
@@ -36,7 +35,7 @@ class CreateGamifyTables extends Migration
         });
 
         // user_badges pivot
-        Schema::create('syehan_gamify_user_badges', function (Blueprint $table) {
+        Schema::create('syehan_gamify_user_badges', function ($table) {
             $table->primary(['user_id', 'badge_id']);
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('badge_id');

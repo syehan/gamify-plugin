@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Reputation
+
+# Model Form Field configuration
+form: $/syehan/gamify/models/reputation/fields.yaml
+
+# Model Class name
+modelClass: Syehan\Gamify\Models\Reputation
+
+# Default redirect location
+defaultRedirect: syehan/gamify/reputations
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: syehan/gamify/reputations/update/:id
+    redirectClose: syehan/gamify/reputations
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: syehan/gamify/reputations
+    redirectClose: syehan/gamify/reputations
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

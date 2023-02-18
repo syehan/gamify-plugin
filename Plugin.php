@@ -65,6 +65,10 @@ class Plugin extends PluginBase
 
         // register event listener
         Event::listen(ReputationChanged::class, SyncBadges::class);
+
+        // binding gamify behavior to user models
+        $this->bindBehaviorsRainLabUser();
+        $this->bindBehaviorsBackendUser();
     }
 
     /**
@@ -74,15 +78,27 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
-
         return [
             'gamify' => [
                 'label'       => 'Gamify',
-                'url'         => Backend::url('syehan/gamify/mycontroller'),
-                'icon'        => 'icon-leaf',
+                'url'         => Backend::url('syehan/gamify/reputations'),
+                'icon'        => 'icon-star',
                 'permissions' => ['syehan.gamify.*'],
                 'order'       => 500,
+                'sideMenu' => [
+                    'reputations' => [
+                        'label'       => 'Reputation',
+                        'icon'        => 'icon-star',
+                        'url'         => Backend::url('syehan/gamify/reputations'),
+                        'permissions' => ['syehan.gamify.access_reputations']
+                    ],
+                    'badges' => [
+                        'label'       => 'Badge',
+                        'icon'        => 'icon-asterisk',
+                        'url'         => Backend::url('syehan/gamify/badges'),
+                        'permissions' => ['syehan.gamify.access_badges']
+                    ],
+                ]
             ],
         ];
     }
@@ -96,17 +112,35 @@ class Plugin extends PluginBase
     {
         $badgeRootNamespace = config(
             'gamify.badge_namespace',
-            $this->app->getNamespace() . 'Gamify\Badges'
+            __NAMESPACE__ . '\Badges'
         );
 
         $badges = [];
 
-        foreach (glob(app_path('/Gamify/Badges/') . '*.php') as $file) {
+        foreach (glob(plugins_path('/syehan/gamify/badges/') . '*.php') as $file) {
             if (is_file($file)) {
                 $badges[] = app($badgeRootNamespace . '\\' . pathinfo($file, PATHINFO_FILENAME));
             }
         }
 
         return collect($badges);
+    }
+
+    protected function bindBehaviorsRainLabUser()
+    {
+        if(class_exists(\RainLab\User\Models\User::class)){
+            \RainLab\User\Models\User::extend(function ($model) {
+                $model->implement[] = 'Syehan.Gamify.Behaviors.UserGamifyBehavior';
+            });
+        }
+    }
+
+    protected function bindBehaviorsBackendUser()
+    {
+        if(class_exists(\Backend\Models\User::class)){
+            \Backend\Models\User::extend(function ($model) {
+                $model->implement[] = 'Syehan.Gamify.Behaviors.UserGamifyBehavior';
+            });
+        }
     }
 }
